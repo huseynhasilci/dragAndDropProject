@@ -50,6 +50,11 @@ const onDrop = (event) => {
   // align node position after drop, so it's centered to the mouse
   nextTick(() => {
     const node = findNode(newNode.id)
+    console.log(node.computedPosition); // burası node'un kordinatlarını veriyor z ile birlikte
+    console.log(node.data); // içerisindeki değerleri verir
+    node.data = "dumenden";
+    console.log(node.position); // buda pozisyonu verir
+    console.log(node.value);
     const stop = watch(
       () => node.dimensions,
       (dimensions) => {
@@ -67,9 +72,9 @@ const onDrop = (event) => {
 <template>
   <div class="dndflow" @drop="onDrop">
     <VueFlow @dragover="onDragOver">
-      <MiniMap />
+      <MiniMap :pannable=true :zoomable=true />
 
-      <Background :variant="BackgroundVariant.Lines" />
+      <Background :variant="BackgroundVariant.Lines" :bgColor="CD5C5C" />
     </VueFlow>
     
     <Sidebar />
